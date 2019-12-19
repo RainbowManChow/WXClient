@@ -1,0 +1,18 @@
+.cover {
+  position: absolute;
+  bottom: 50rpx;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.scan {
+  border-radius: 30px;
+  background: #673bb7;
+  color: white;
+  padding: 0rpx 100rpx;
+  width: 20%;
+  line-height: 1.8;
+  text-align: center;
+
+}

@@ -1,0 +1,8 @@
+<view class='shade' hidden='{{popup}}' bindtap='hidePopup'></view>
+<view class='shade_box popup' hidden='{{popup}}'>
+   <!-- <view class='title'><text>弹窗：</text></view>  -->
+    <view class='content'> 获取微信授权信息</view>
+    <view class='copy'>微信登录需要获取您的用户信息，请授权</view>
+    <button  open-type="getUserInfo" class='msg' bindgetuserinfo="agreeGetUser" lang="zh_CN">授权</button>
+</view>
+ 

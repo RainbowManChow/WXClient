@@ -1,0 +1,23 @@
+{
+  "pages": [
+    "pages/masktoast/masktoast",
+    "pages/mapindex/mapindex",
+    "pages/index/index",
+    "pages/main/main",
+    "pages/webhtml/webhtml",
+    "pages/pointdetail/pointdetail",
+    "pages/addNew/addNew"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#673bb7",
+    "navigationBarTitleText": "RainbowMan",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于获取周边信息"
+    }
+  }
+}

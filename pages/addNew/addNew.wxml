@@ -1,0 +1,14 @@
+<view class='page'>
+ <textarea class='text' bindinput="input" placeholder="新增一个" auto-height/>
+ <view class="image_content">
+ <view class='image' wx:for="{{img_url}}">
+  <image class="moment_img" src="{{item}}"></image>
+  <view  data-index="{{index}}" catchtap="deleteImg"></view>
+ </view>
+ <view class='image' style='display:{{hideAdd?"none":"block"}}'>
+  <image bindtap="chooseimage" class="moment_img" src='../../images/add.jpg'></image>
+ </view>
+ </view>
+ <text style="margin-top:5px;margin-left:5px;color:#dddbe0;margin-bottom:5px;" >位置:{{currentlocation}}</text>
+ <button bindtap="send" style='margin-top:10px;margin-right:5px;margin-left:5px;background: #673bb7;color: white;'>发布</button>
+</view>

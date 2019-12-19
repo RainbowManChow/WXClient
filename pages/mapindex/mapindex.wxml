@@ -1,0 +1,15 @@
+ <map
+      id="myMap"
+      style="width: 100%; height:100vh;"
+      latitude="{{latitude}}"
+      longitude="{{longitude}}"
+      markers="{{markers}}"
+      data-markers="{{markers}}"
+      covers="{{covers}}"
+      bindmarkertap='gotohere'
+      show-location
+    >
+    <cover-view class="cover">
+    <cover-view class="scan" catchtap="goAdd">新增帮助</cover-view>
+  </cover-view>
+    </map>
