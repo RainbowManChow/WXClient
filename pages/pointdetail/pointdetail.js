@@ -9,10 +9,9 @@ Page({
   data: {
     markers: {},
     markerId:"",
-    lat:"",
-    lon:"",
     filmDetail: {},
-    showLoading: false
+    showLoading: false,
+    imagesshow:[]
   },
 
   /**
@@ -20,17 +19,35 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-    let markers = JSON.parse(options.markers);
-    let lat = options.markerId;
-    let lon = options.markerId;
-    var markerId = options.markerId;
     var object = this.data.filmDetail;
-    this.data.markers = markers;
-    this.data.markerId = markerId;
-    this.data.lat = lat;
-    this.data.lon=lon;
-    object.good="haha";
-    object.images = app.globalData.paurl + '/WXIndex/getImages/' +"wx1da383f6062172ae.2019-12-10-16-14-01-346.jpg";
+    this.data.markers = JSON.parse(options.markers);
+    this.data.markerId = options.markerId;
+    var images="",description="",user="",location="";
+    var imagess = new Array();
+    var resultimagess = new Array();
+    for (let item of this.data.markers) {
+      if (item.id == options.markerId) {
+        images =item.needimages;
+        imagess=images.split(",");
+        for (var j = 0, len = imagess.length; j < len; j++) {
+          resultimagess.push(app.globalData.paurl + '/WXIndex/getImages?imgurl='+imagess[j]);
+        }
+        that.imagesshow = resultimagess;
+        object.imagess = resultimagess;
+        object.location = item.needlocation;
+        object.images = app.globalData.paurl + '/WXIndex/getImages?imgurl='+imagess[0];
+        object.user = item.needusername;
+        object.good = item.needdescription;
+        object.title = item.needtitle;
+        object.time=2019;
+        that.setData({
+          filmDetail: object,
+          showLoading: false
+        });
+      }
+      }
+  /**  object.good="haha";
+    object.images = app.globalData.paurl + '/WXIndex/getImages?imgurl=' //+"E:/pic/wx1da383f6062172ae.2019-12-10-16-14-01-346.jpg";
     timer = setTimeout(function () {
       console.log("----Countdown----");
       that.setData({
@@ -38,7 +55,18 @@ Page({
         showLoading: false
       });
     }, 3000);
+    **/
    
+  },
+  previewImage: function (e) {
+    var current = e.target.dataset.src;
+    wx.previewImage({
+      current: current, // 当前显示图片的http链接  
+      urls: this.data.filmDetail.imagess// 需要预览的图片http链接列表  
+    })
+  },
+  goto: function () {
+    gotowhere(this.data.markers, this.data.markerId);
   },
 
   /**
@@ -99,10 +127,10 @@ Page({
 })
 function gotowhere(markers, markerId){
   for (let item of markers) {
-    if (item.id === markerId) {
-      lat = item.latitude;
-      lon = item.longitude;
-      name = item.callout.content;
+    if (item.id == markerId) {
+      let lat = parseFloat(item.latitude);
+      let lon = parseFloat(item.longitude);
+      let name = item.callout.content;
       wx.openLocation({ // 打开微信内置地图，实现导航功能（在内置地图里面打开地图软件）
         latitude: lat,
         longitude: lon,

@@ -1,71 +1,29 @@
 <view class="container">
-    <block wx:if="{{showLoading}}">
-        <view class="loading">玩命加载中…</view>
-    </block>
-    <block wx:else>
     <!-- fd: film detail -->
         <view class="fd-hd" style=" margin-top:0rpx">
             <view class="fd-hd-bg" style="background-image: url({{filmDetail.images}})"></view>
-            <image src="{{filmDetail.images}}" class="fd-cover"></image>
+            <image src="{{filmDetail.images}}" class="fd-cover" bindtap="previewImage"></image>
             <view class="fd-intro">
                 <view class="fd-title">{{filmDetail.good}}</view>
-                <view class="fd-intro-txt">导演：{{filmDetail.good}}</view>
-                <view class="fd-intro-txt">
-                    演员：
-                    <block wx:for="{{filmDetail.casts}}" wx:for-item="filmDetailCastItem" wx:for-index="filmDetailCastIndex" wx:key="filmDetailCastItem">
-                        {{filmDetailCastItem.name}}
-                        <block wx:if="{{filmDetailCastIndex !== filmDetail.casts.length - 1}}">/</block>
-                    </block>
-                </view>
-                <view class="fd-intro-txt">豆瓣评分：
-                    <block wx:if="{{filmDetail.rating.average == 0}}">
-                        暂无评分
-                    </block>
-                    <block wx:else>
-                        {{filmDetail.rating.average}}分
-                    </block>
-                </view>
-                <view class="fd-intro-txt">上映年份：{{filmDetail.year}}年</view>
-            </view>
-        </view>
-        <view class="fd-data">
-            <view class="fd-data-item">
-                <view class="fd-data-num">{{filmDetail.collect_count}}</view>
-                <view class="fd-data-title">赞过</view>
-            </view>
-            <view class="fd-data-item">
-                <view class="fd-data-num">{{filmDetail.wish_count}}</view>
-                <view class="fd-data-title">帮助过</view>
-            </view>
-            <view class="fd-data-item">
-                <view class="fd-data-num">{{filmDetail.ratings_count}}</view>
-                <view class="fd-data-title">收藏人数</view>
+                <view class="fd-intro-txt">上传人：{{filmDetail.user}}</view>
+                <view class="fd-intro-txt">上传地点：{{filmDetail.location}}</view>
+                <view class="fd-intro-txt">上传时间：{{filmDetail.time}}年</view>
             </view>
         </view>
         <view class="fd-bd">
             <view class="fd-bd-title">帮助简介</view>
-            <view class="fd-bd-intro">{{filmDetail.summary}}</view>
+            <view class="fd-bd-intro">{{filmDetail.good}}</view>
             <view class="fd-bd-title">现场情况</view>
             <view class="fd-bd-person">
-                <view class="fd-bd-person-item" data-id="{{filmDetail.directors[0].id}}" bindtap="viewPersonDetail">
-                    <image class="fd-bd-person-avatar" src="{{filmDetail.directors[0].avatars.medium}}"></image>
-                    <view class="fd-bd-person-name">{{filmDetail.directors[0].name}}</view>
-                    <view class="fd-bd-person-role">导演</view>
-                </view>
-                <block wx:for="{{filmDetail.casts}}" wx:for-item="filmDetailCastItem" wx:key="filmDetailCastItem">
-                    <view class="fd-bd-person-item" data-id="{{filmDetailCastItem.id}}" bindtap="viewPersonDetail">
-                        <image class="fd-bd-person-avatar" src="{{filmDetailCastItem.avatars.medium}}"></image>
-                        <view class="fd-bd-person-name">{{filmDetailCastItem.name}}</view>
-                        <view class="fd-bd-person-role">演员</view>
+              <scroll-view scroll-x="true" style=" white-space: nowrap; display: flex ;width: 97vw; height: 400rpx" >
+                <block wx:for="{{filmDetail.imagess}}">
+                    <view class="fd-bd-person-item" data-id="{{index}}" bindtap="previewImage" style=" display: inline-block">
+                        <image class="fd-bd-person-avatar" src="{{item}}"></image>           
+                       <view class="fd-bd-person-role">{{filmDetail.user}}上传</view>
                     </view>
                 </block>
+            </scroll-view>
             </view>
-            <view class="fd-bd-title">标签</view>
-            <view class="fd-bd-tag">
-                <block wx:for="{{filmDetail.genres}}" wx:for-item="filmDetailTagItem" wx:key="filmDetailTagItem">
-                    <view class="fd-bd-tag-item" data-tag="{{filmDetailTagItem}}" catchtap="viewFilmByTag">{{filmDetailTagItem}}</view>
-                </block>
-            </view>
-        </view>
-    </block> 
+ </view>
+  <button   class='guoqu' bindgetuserinfo="goto" lang="zh_CN">过去</button>
 </view>

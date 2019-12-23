@@ -154,3 +154,13 @@ padding: 0rpx;
 .fd-bd-person-role {
     color: #999
 }
+
+.guoqu {
+  border-radius: 30px;
+  background: #673bb7;
+  color: white;
+  padding: 0rpx 30rpx;
+  width: 30vw;
+  height: 8vm;
+  text-align: center;
+}

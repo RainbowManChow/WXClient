@@ -30,7 +30,7 @@ App({
     userId:null,
     keys:null,
     access:null,
-    paurl: 'http://localhost:9999'  //http://localhost:9999 //https://rainbowman.goho.co
+    paurl: 'https://rainbowman.goho.co'  //http://localhost:9999 //https://rainbowman.goho.co
   },
   title:[],
   imgUrls:[],

@@ -1,4 +1,4 @@
-<view class='shade' hidden='{{popup}}' bindtap='hidePopup'></view>
+<view class='shade' hidden='{{popup}}' ></view>
 <view class='shade_box popup' hidden='{{popup}}'>
    <!-- <view class='title'><text>弹窗：</text></view>  -->
     <view class='content'> 获取微信授权信息</view>
