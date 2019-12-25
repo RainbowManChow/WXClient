@@ -1,5 +1,6 @@
 <view class='page'>
- <textarea class='text' bindinput="input" placeholder="新增一个" auto-height/>
+<textarea class='text' bindinput="title" placeholder="来个标题" auto-height/>
+ <textarea class='text' bindinput="input" placeholder="来点描述" auto-height/>
  <view class="image_content">
  <view class='image' wx:for="{{img_url}}">
   <image class="moment_img" src="{{item}}"></image>

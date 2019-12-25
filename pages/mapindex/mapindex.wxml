@@ -7,9 +7,12 @@
       data-markers="{{markers}}"
       covers="{{covers}}"
       bindmarkertap='gotohere'
+      bindregionchange="regionchange"
+      circles="{{circles}}"
       show-location
     >
     <cover-view class="cover">
-    <cover-view class="scan" catchtap="goAdd">新增帮助</cover-view>
+     <cover-view class="scan" bindtap="my_location">我的位置</cover-view>
+    <cover-view class="scan" catchtap="goAdd">新增</cover-view>
   </cover-view>
     </map>

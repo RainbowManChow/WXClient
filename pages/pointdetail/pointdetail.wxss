@@ -103,7 +103,7 @@ padding: 0rpx;
     font-size: 32rpx;
     font-weight: bold;
     color: #444;
-    border-left: 10rpx solid #47a86c;
+    border-left: 10rpx solid #673bb7;
 }
 
 .fd-bd-intro {

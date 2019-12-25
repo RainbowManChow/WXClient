@@ -13,22 +13,25 @@ Page({
     currentlocation:'当前位置',
     latitude:'',
     longitude:'',
-    location:''
+    location:'',
+    title:''
       },
   onLoad: function (options) {
+    this.data.latitude= options.lat;
+    this.data.longitude = options.lon;
     var that=this;
     //小程序api获取当前坐标
     wx.getLocation({
       type: 'gcj02',
       success: function (res) {
-        that.data.latitude = res.latitude;
-        that.data.longitude = res.longitude;
+       // that.data.latitude = res.latitude;
+        //that.data.longitude = res.longitude;
         console.log(res)
         // 调用sdk接口
         qqmapsdk.reverseGeocoder({
           location: {
-            latitude: res.latitude,
-            longitude: res.longitude
+            latitude: that.data.latitude,
+            longitude: that.data.longitude
           },
           success: function (res) {
             //获取当前地址成功
@@ -52,6 +55,11 @@ Page({
   input: function (e) {
     this.setData({
       content: e.detail.value
+    })
+  },
+  title: function (e) {
+    this.setData({
+      title: e.detail.value
     })
   },
 
@@ -130,6 +138,7 @@ Page({
           if (img_url_ok.length == img_url.length) {
             var userid = app.globalData.userId;
             var content = that.data.content;
+            var title = that.data.title;
             wx.request({
               url: app.globalData.paurl + '/WXIndex/saveInfo',
               method: 'post',
@@ -140,6 +149,7 @@ Page({
                 user_id: userid,
                 images: img_url_ok,
                 content: content,
+                title: title,
                 latitude: that.data.latitude,
                 longitude:that.data.longitude,
                 location:that.data.location

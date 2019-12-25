@@ -4,16 +4,16 @@
             <view class="fd-hd-bg" style="background-image: url({{filmDetail.images}})"></view>
             <image src="{{filmDetail.images}}" class="fd-cover" bindtap="previewImage"></image>
             <view class="fd-intro">
-                <view class="fd-title">{{filmDetail.good}}</view>
+                <view class="fd-title">{{filmDetail.title}}</view>
                 <view class="fd-intro-txt">上传人：{{filmDetail.user}}</view>
                 <view class="fd-intro-txt">上传地点：{{filmDetail.location}}</view>
-                <view class="fd-intro-txt">上传时间：{{filmDetail.time}}年</view>
+                <view class="fd-intro-txt">上传时间：{{filmDetail.time}}</view>
             </view>
         </view>
         <view class="fd-bd">
-            <view class="fd-bd-title">帮助简介</view>
+            <view class="fd-bd-title">简介</view>
             <view class="fd-bd-intro">{{filmDetail.good}}</view>
-            <view class="fd-bd-title">现场情况</view>
+            <view class="fd-bd-title">情况</view>
             <view class="fd-bd-person">
               <scroll-view scroll-x="true" style=" white-space: nowrap; display: flex ;width: 97vw; height: 400rpx" >
                 <block wx:for="{{filmDetail.imagess}}">
@@ -24,6 +24,9 @@
                 </block>
             </scroll-view>
             </view>
+            <view class="fd-bd-title">留言</view>
+            <view class="fd-bd-intro">暂无哦(⊙o⊙)？</view>
  </view>
-  <button   class='guoqu' bindgetuserinfo="goto" lang="zh_CN">过去</button>
+  <button   class='guoqu' bindtap="goto" lang="zh_CN">往这去</button>
+   <view class="fd-bd-intro" style="align-items: center;justify-content: center; display: flex;margin-top:10vw">已经到底啦~</view>
 </view>

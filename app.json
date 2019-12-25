@@ -1,10 +1,7 @@
 {
   "pages": [
-    "pages/masktoast/masktoast",
-    "pages/mapindex/mapindex",
     "pages/index/index",
-    "pages/main/main",
-    "pages/webhtml/webhtml",
+    "pages/mapindex/mapindex",
     "pages/pointdetail/pointdetail",
     "pages/addNew/addNew"
   ],

@@ -39,7 +39,7 @@ Page({
         object.user = item.needusername;
         object.good = item.needdescription;
         object.title = item.needtitle;
-        object.time=2019;
+        object.time = item.needrecentdate;
         that.setData({
           filmDetail: object,
           showLoading: false
