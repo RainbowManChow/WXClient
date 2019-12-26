@@ -11,7 +11,8 @@ Page({
     markerId:"",
     filmDetail: {},
     showLoading: false,
-    imagesshow:[]
+    imagesshow:[],
+    paurl:"https://rainbowman.goho.co"
   },
 
   /**
@@ -30,12 +31,12 @@ Page({
         images =item.needimages;
         imagess=images.split(",");
         for (var j = 0, len = imagess.length; j < len; j++) {
-          resultimagess.push(app.globalData.paurl + '/WXIndex/getImages?imgurl='+imagess[j]);
+          resultimagess.push(that.data.paurl + '/WXIndex/getImages?imgurl='+imagess[j]);
         }
         that.imagesshow = resultimagess;
         object.imagess = resultimagess;
         object.location = item.needlocation;
-        object.images = app.globalData.paurl + '/WXIndex/getImages?imgurl='+imagess[0];
+        object.images = that.data.paurl + '/WXIndex/getImages?imgurl='+imagess[0];
         object.user = item.needusername;
         object.good = item.needdescription;
         object.title = item.needtitle;
@@ -115,7 +116,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    var that=this
+    return {
+      title: '转发',
+      path: '/pages/pointdetail/pointdetail?markers=' + JSON.stringify(that.data.markers) + '&markerId=' + that.data.markerId,
+      success: function (res) { }
+    }
   },
   onPageScroll: function (e) {
   /**  if (e.scrollTop < 0) {

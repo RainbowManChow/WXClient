@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/mapindex/mapindex",
     "pages/pointdetail/pointdetail",
-    "pages/addNew/addNew"
+    "pages/addNew/addNew",
+    "pages/userCenter/userCenter"
   ],
   "window": {
     "backgroundTextStyle": "light",

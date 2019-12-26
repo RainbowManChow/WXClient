@@ -1,11 +1,14 @@
-const app = getApp()
-
+var app = getApp()
 Page({
   data: {
-    latitude:"",
-    longitude:""
+    latitude: "",
+    longitude: "",
+    topText: ' 欢迎来到RainbowMan',
+    markers: "",
+    markid: "",
   },
-  onLoad: function () {
+  onLoad: function (option) {
+    console.log("haha：" + undefined == option ? "" : option);
     var self = this;
     this.mapCtx = wx.createMapContext('myMap');
     wx.getLocation({
@@ -25,19 +28,22 @@ Page({
           success: function (ress) {
             self.latitude = res.latitude;
             self.longitude = res.longitude;
+            //   self.data.markers = markers;
             self.setData({
               latitude: res.latitude,
               longitude: res.longitude,
               markers: ress.data.markers,
-              circles: [{
-                latitude: res.latitude,
-                longitude: res.longitude,
-                color: '#673bb7',
-                fillColor: '#d1edff88',
-                radius: 15,//定位点半径
-                strokeWidth: 1
-              }]
+              userInfo: app.globalData.userInfo
+              /**    circles: [{
+                    latitude: res.latitude,
+                    longitude: res.longitude,
+                    color: '#673bb7',
+                    fillColor: '#d1edff88',
+                    radius: 15,//定位点半径
+                    strokeWidth: 1
+                  }] **/
             });
+
           },
           fail: function () {
             wx.hideLoading();
@@ -49,12 +55,39 @@ Page({
           }
         })
 
-      
+
       }
     })
+
+  },
+
+  //转发
+  onShareAppMessage: function (res) {
+    var userid = app.globalData.userid;
+    if (res.from === 'button') { }
+    return {
+      title: '转发',
+      path: '/pages/mapindex/mapindex?from_uid=' + userid,
+      success: function (res) { }
+    }
+  },
+  moveToLocation: function () {
+    var that = this;
+    wx.chooseLocation({
+      success: function (res) {
+        console.log(res);
+        //选择地点之后返回的结果
+      },
+      fail: function (err) {
+        console.log(err)
+      }
+
+    });
+
   },
   regionchange(e) {
-    console.log(e)
+    //this.moveToLocation();
+    //console.log(e)
     // 地图发生变化的时候，获取中间点，也就是用户选择的位置toFixed
     if (e.type == 'end' && (e.causedBy == 'scale' || e.causedBy == 'drag')) {
       console.log(e)
@@ -69,14 +102,14 @@ Page({
           that.setData({
             latitude: res.latitude,
             longitude: res.longitude,
-            circles: [{
-              latitude: res.latitude,
-              longitude: res.longitude,
-              color: '#673bb7',
-              fillColor: '#d1edff88',
-              radius: 15,//定位点半径
-              strokeWidth: 1
-            }]
+            /**     circles: [{
+                 latitude: res.latitude,
+                 longitude: res.longitude,
+                 color: '#673bb7',
+                 fillColor: '#d1edff88',
+                 radius: 15,//定位点半径
+                 strokeWidth: 1
+               }] **/
           })
         }
       })
@@ -87,7 +120,19 @@ Page({
     var that = this;
     that.onLoad();
   },
-  onShow:function(){
+  unfinished() {
+    wx.showToast({
+      title: '敬请期待',
+      icon: "none"
+    })
+  },
+  toUser: function (e) {
+    var that = this;
+    wx.navigateTo({
+      url: '/pages/userCenter/userCenter?markers=' + that.data.markers
+    })
+  },
+  onShow: function () {
     this.onLoad();
   },
   gotohere: function (res) {
@@ -104,7 +149,7 @@ Page({
     })
   },
   goAdd: function (res) {
-    var that=this;
+    var that = this;
     console.log(res);
     wx.navigateTo({
       url: '/pages/addNew/addNew?lat=' + that.latitude + '&lon=' + that.longitude

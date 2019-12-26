@@ -1,4 +1,4 @@
- <map
+<map
       id="myMap"
       style="width: 100%; height:100vh;"
       latitude="{{latitude}}"
@@ -11,8 +11,21 @@
       circles="{{circles}}"
       show-location
     >
-    <cover-view class="cover">
-     <cover-view class="scan" bindtap="my_location">我的位置</cover-view>
-    <cover-view class="scan" catchtap="goAdd">新增</cover-view>
-  </cover-view>
+ <!-- 地图上下阴影 -->
+      <cover-image class='map-shadow-top' src='/images/map-shadow-top.png'/>
+      <cover-image class='map-shadow-btm' src='/images/map-shadow-btm.png'/>
+      <!-- 顶部横幅  {{userInfo.avatarUrl}} -->
+      <cover-view class='top-tips'>
+        <cover-image class='top-icon' src='{{userInfo.avatarUrl}}'/>   
+        <cover-view class='top-text' style="font-weight:bold">{{topText}}</cover-view>
+      </cover-view>
+      <!-- 中心坐标 -->
+      <cover-image class='map-icon_point' src='/images/point_in_map.png'/>
+      <!-- 控件 -->
+      <cover-image class='map-icon map-icon_msg' src='/images/icon-msg.png' bindtap='unfinished'/>
+      <cover-image class='map-icon map-icon_user' src='/images/icon-user.png' bindtap='toUser'/>
+      <cover-image class='map-icon map-icon_reset' src='/images/reset.png' bindtap='my_location'/>
+      <cover-image class='map-icon map-icon_center' src='/images/addnew.png' bindtap='goAdd'/>
+
     </map>
+
