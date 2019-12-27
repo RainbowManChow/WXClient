@@ -8,6 +8,10 @@ Page({
    */
   data: {
     markers: {},
+    lat:"",
+    lon:"",
+    name:"",
+    markerarray:[],
     markerId:"",
     filmDetail: {},
     showLoading: false,
@@ -20,33 +24,15 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-    var object = this.data.filmDetail;
-    this.data.markers = JSON.parse(options.markers);
     this.data.markerId = options.markerId;
-    var images="",description="",user="",location="";
-    var imagess = new Array();
-    var resultimagess = new Array();
-    for (let item of this.data.markers) {
-      if (item.id == options.markerId) {
-        images =item.needimages;
-        imagess=images.split(",");
-        for (var j = 0, len = imagess.length; j < len; j++) {
-          resultimagess.push(that.data.paurl + '/WXIndex/getImages?imgurl='+imagess[j]);
-        }
-        that.imagesshow = resultimagess;
-        object.imagess = resultimagess;
-        object.location = item.needlocation;
-        object.images = that.data.paurl + '/WXIndex/getImages?imgurl='+imagess[0];
-        object.user = item.needusername;
-        object.good = item.needdescription;
-        object.title = item.needtitle;
-        object.time = item.needrecentdate;
-        that.setData({
-          filmDetail: object,
-          showLoading: false
-        });
-      }
-      }
+    if (options.markerarray) {
+      this.data.markerarray = JSON.parse(options.markerarray);
+      this.fordo(this.data.markerarray, this.data.markerId);
+    } else {
+      this.data.markers = JSON.parse(options.markers);
+      this.fordo(this.data.markers, this.data.markerId);
+    }
+
   /**  object.good="haha";
     object.images = app.globalData.paurl + '/WXIndex/getImages?imgurl=' //+"E:/pic/wx1da383f6062172ae.2019-12-10-16-14-01-346.jpg";
     timer = setTimeout(function () {
@@ -67,7 +53,20 @@ Page({
     })
   },
   goto: function () {
-    gotowhere(this.data.markers, this.data.markerId);
+    let lat = parseFloat(this.data.lat);
+    let lon = parseFloat(this.data.lon);
+    let name = this.data.name;
+    wx.openLocation({ // 打开微信内置地图，实现导航功能（在内置地图里面打开地图软件）
+      latitude: lat,
+      longitude: lon,
+      name: name,
+      success: function (res) {
+        console.log(res);
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    })
   },
 
   /**
@@ -111,6 +110,37 @@ Page({
   onReachBottom: function () {
 
   },
+  fordo: function (markers, markerId){
+    var object = this.data.filmDetail;
+    var that=this;
+    var images = "", description = "", user = "", location = "";
+    var imagess = new Array();
+    var resultimagess = new Array();
+    for(let item of markers) {
+      if (item.id == markerId) {
+        this.data.lat = item.latitude;
+        this.data.lon = item.longitude;
+        this.data.name = item.needtitle;
+        images = item.needimages;
+        imagess = images.split(",");
+        for (var j = 0, len = imagess.length; j < len; j++) {
+          resultimagess.push(that.data.paurl + '/WXIndex/getImages?imgurl=' + imagess[j]);
+        }
+        that.imagesshow = resultimagess;
+        object.imagess = resultimagess;
+        object.location = item.needlocation;
+        object.images = that.data.paurl + '/WXIndex/getImages?imgurl=' + imagess[0];
+        object.user = item.needusername;
+        object.good = item.needdescription;
+        object.title = item.needtitle;
+        object.time = item.needrecentdate;
+        that.setData({
+          filmDetail: object,
+          showLoading: false
+        });
+      }
+    }
+  },
 
   /**
    * 用户点击右上角分享
@@ -129,29 +159,6 @@ Page({
         scrollTop: 0
       })
     } **/
-  }  
+  },
+  
 })
-function gotowhere(markers, markerId){
-  for (let item of markers) {
-    if (item.id == markerId) {
-      let lat = parseFloat(item.latitude);
-      let lon = parseFloat(item.longitude);
-      let name = item.callout.content;
-      wx.openLocation({ // 打开微信内置地图，实现导航功能（在内置地图里面打开地图软件）
-        latitude: lat,
-        longitude: lon,
-        name: name,
-        success: function (res) {
-          console.log(res);
-        },
-        fail: function (res) {
-          console.log(res);
-        }
-      })
-      break;
-    }
-  }
-
-
-
-}

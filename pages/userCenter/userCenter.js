@@ -29,6 +29,11 @@ Page({
       icon:"none"
     })
   },
+ gorecentinfo() {
+   wx.navigateTo({
+     url: '/pages/receninfo/receninfo'
+   })
+  },
   logout(){
     app.globalData.loginStatus = 0;
     wx.removeStorage({

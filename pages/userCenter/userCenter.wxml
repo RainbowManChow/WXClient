@@ -6,7 +6,7 @@
 
   <view class='other-info-list'>
 
-    <navigator url='' class='list-item' bindtap='unfinished'>
+    <navigator url='' class='list-item' bindtap='gorecentinfo'>
       <image class='left' src='/images/stroke.png'></image>
       <view class='text-list'>
         <view class='text-hd'>已发布</view>
@@ -21,7 +21,7 @@
         <view class='text-hd'>留言</view>
         <view class='text-bd'>我的留言</view>
       </view>
-      <image class='right' src='/images/coupon.png'></image>
+      <image class='right' src='/images/arrow-right.png'></image>
     </view>
 
     <view class='list-item' bindtap='unfinished'>

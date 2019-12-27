@@ -4,7 +4,8 @@
     "pages/mapindex/mapindex",
     "pages/pointdetail/pointdetail",
     "pages/addNew/addNew",
-    "pages/userCenter/userCenter"
+    "pages/userCenter/userCenter",
+    "pages/receninfo/receninfo"
   ],
   "window": {
     "backgroundTextStyle": "light",

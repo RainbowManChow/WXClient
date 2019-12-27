@@ -1,0 +1,8 @@
+  <view class="userInfo">
+      <image class='user-head' src='{{userInfo.avatarUrl}}'/>
+      <view class='user-name'>{{userInfo.nickName}}</view>
+  </view>
+ <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{items}}" wx:key="" bindtap="godetail" data-id="{{item.id}}" >
+  <view class="content"><image style="height:3vw;width:3vw" src='/images/arrow-right.png'></image>{{item.txt}}</view>
+  <view class="del" catchtap="del" data-index="{{index}}">删除</view>
+ </view>
