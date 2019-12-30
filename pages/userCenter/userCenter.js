@@ -3,25 +3,40 @@ const app = getApp()
 Page({
   data: {
     userInfo: {},
-    phone:null
+    phone:null,
+    items:[],
+    rencentcount:""
   },
   onLoad: function (options) {
-    wx.getUserInfo({
-      success:(e)=>{
-        console.log(e.userInfo)
-        this.setData({
-          userInfo: e.userInfo
-        })
+    var that = this;
+    wx.request({
+      url: app.globalData.paurl + '/WXIndex/getRecentHelpByOpenid',
+      method: 'post',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+      data: {
+        'userid': app.globalData.userId
+      },
+      success: function (res) {
+        that.setData({
+          items: res.data,
+          userInfo: app.globalData.userInfo,
+          rencentcount: res.data.length
+        });
+
+      },
+      fail: function () {
+        wx.hideLoading();
+        wx.showToast({
+          title: '请重新授权',
+          icon: 'warn',
+          duration: 1500,
+        });
       }
     })
-    wx.getStorage({
-      key: 'phone',
-      success: (res) => {
-        this.setData({
-          phone:res.data
-        })
-      }
-    })
+
+
   },
   unfinished () {
     wx.showToast({
@@ -30,8 +45,9 @@ Page({
     })
   },
  gorecentinfo() {
+   var that=this;
    wx.navigateTo({
-     url: '/pages/receninfo/receninfo'
+     url: '/pages/receninfo/receninfo?items=' + JSON.stringify(that.data.items)
    })
   },
   logout(){

@@ -16,7 +16,7 @@
       <cover-image class='map-shadow-btm' src='/images/map-shadow-btm.png'/>
       <!-- 顶部横幅  {{userInfo.avatarUrl}} -->
       <cover-view class='top-tips'>
-        <cover-image class='top-icon' src='{{userInfo.avatarUrl}}'/>   
+        <cover-image  wx:if='{{userInfo.avatarUrl}}' class='top-icon' src='{{userInfo.avatarUrl}}'/>   
         <cover-view class='top-text' style="font-weight:bold">{{topText}}</cover-view>
       </cover-view>
       <!-- 中心坐标 -->

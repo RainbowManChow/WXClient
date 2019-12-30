@@ -7,8 +7,7 @@ Page({
     markers: "",
     markid: "",
   },
-  onLoad: function (option) {
-    console.log("haha：" + undefined == option ? "" : option);
+  onReady: function (option) {
     var self = this;
     this.mapCtx = wx.createMapContext('myMap');
     wx.getLocation({
@@ -118,7 +117,7 @@ Page({
   //定位到自己的位置事件
   my_location: function (e) {
     var that = this;
-    that.onLoad();
+    that.onReady();
   },
   unfinished() {
     wx.showToast({
@@ -133,7 +132,7 @@ Page({
     })
   },
   onShow: function () {
-    this.onLoad();
+    //this.onReady();
   },
   gotohere: function (res) {
     console.log(res);

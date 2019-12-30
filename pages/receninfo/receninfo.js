@@ -5,33 +5,12 @@ Page({
     startX: 0, //开始坐标
     startY: 0
   },
-  onLoad: function () {
+  onLoad: function (option) {
     var that = this;
-    wx.request({
-      url: app.globalData.paurl + '/WXIndex/getRecentHelpByOpenid',
-      method: 'post',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-      },
-      data: {
-        'userid': app.globalData.userId
-      },
-      success: function (res) {
-        that.setData({
-          items: res.data,
-          userInfo: app.globalData.userInfo,
-        });
-
-      },
-      fail: function () {
-        wx.hideLoading();
-        wx.showToast({
-          title: '请重新授权',
-          icon: 'warn',
-          duration: 1500,
-        });
-      }
-    })
+    that.setData({
+      items: JSON.parse(option.items),
+      userInfo: app.globalData.userInfo
+    });
   },
   //手指触摸动作开始 记录起点X坐标
   touchstart: function (e) {
@@ -91,7 +70,7 @@ Page({
     })
   },
   godetail: function (e) {
-    var that=this;
+    var that = this;
     console.log(e.currentTarget.dataset.id);
     wx.navigateTo({
       url: '/pages/pointdetail/pointdetail?markerarray=' + JSON.stringify(that.data.items) + '&markerId=' + e.currentTarget.dataset.id

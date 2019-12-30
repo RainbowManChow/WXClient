@@ -10,7 +10,7 @@
       <image class='left' src='/images/stroke.png'></image>
       <view class='text-list'>
         <view class='text-hd'>已发布</view>
-        <view class='text-bd'>自己最近发布<text class='oColor'>{{0}}</text></view>
+        <view class='text-bd'>自己最近发布<text class='oColor'>{{rencentcount}}</text></view>
       </view>
       <image class='right' src='/images/arrow-right.png'></image>
     </navigator>
