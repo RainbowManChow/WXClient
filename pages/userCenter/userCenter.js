@@ -58,5 +58,11 @@ Page({
     wx.redirectTo({
       url: '/pages/init/init'
     })
+  },
+  gotofuli(){
+    var that = this;
+    wx.navigateTo({
+      url: '/pages/videplay/videoplay'
+    })
   }
 })

@@ -1,0 +1,38 @@
+<!--pages/videplay/videoplay.wxml-->
+<view class="body">
+    <view class="h-bar-1">
+        <text class="active">电视剧</text>
+        <text>综艺</text>
+        <text>电影</text>
+        <text>动漫</text>
+        <icon type="search" size="26" color="#808080"></icon>
+    </view>
+    <view class="h-bar-2">
+        <text>偶像</text>
+        <text>古装</text>
+        <text>玄幻</text>
+        <text>历史</text>
+        <text>全部分类</text>
+    </view>
+    <view class="content-ul">
+        <view class="list-title">全网直播 ></view>
+        <view class="list">
+            <view class="detail">
+                <image src="../../images/img1.png" mode="widthFix" bindtap="gotoplay" data-name="test.mp4"></image>
+                <view class="font-area">
+                    <text class="bold">有本事点开</text>
+                    <text>你们这些哈皮有本事点开</text>
+                </view>
+            </view>
+            <view class="vertical-space"></view>
+            <view class="detail">
+                <image src="../../images/img3.png" mode="widthFix" bindtap="gotoplay" data-name="test.mp4"></image>
+                <view class="font-area">
+                    <text class="bold">有本事点开</text>
+                    <text>你们这些哈皮有本事点开</text>
+                </view>
+            </view>
+        </view>
+    </view> 
+      </view> 
+

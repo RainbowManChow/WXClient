@@ -1,11 +1,23 @@
-// pages/renceninfo/renceninfo.js
+// pages/videplay/videoplay.js
+var app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    src: '',
+    danmuList: [
+      {
+        text: '第 1s 出现的弹幕',
+        color: '#ff0000',
+        time: 1
+      },
+      {
+        text: '第 3s 出现的弹幕',
+        color: '#ff00ff',
+        time: 3
+      }]
   },
 
   /**
@@ -18,8 +30,8 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
+  onReady: function (res) {
+ 
   },
 
   /**
@@ -62,5 +74,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  gotoplay: function (options){
+    var that = this;
+    wx.navigateTo({
+      url: '/pages/videplay/playpage?name=' + options.currentTarget.dataset.name
+    })
   }
 })
