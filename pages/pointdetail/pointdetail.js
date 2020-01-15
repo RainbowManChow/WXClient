@@ -1,6 +1,12 @@
 // pages/pointdetail/pointdetail.js
 var app = getApp()
 var timer; 
+
+var mydata = {
+  end: 0,
+  replyUserName: ""
+}
+
 Page({
 
   /**
@@ -16,7 +22,8 @@ Page({
     filmDetail: {},
     showLoading: false,
     imagesshow:[],
-    paurl:"https://rainbowman.goho.co"
+    paurl:"https://rainbowman.goho.co",
+    list: []
   },
 
   /**
@@ -33,6 +40,22 @@ Page({
       this.fordo(this.data.markers, this.data.markerId);
     }
 
+    mydata.sourceId = options.markerId;
+    mydata.commentId = "";
+    mydata.replyopenid="";
+    mydata.replyUserName = "";
+    //设置scroll的高度
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          scrollHeight:'5vw',
+          userId: app.globalData.userId
+        });
+      }
+    });
+    mydata.page = 1;
+    that.getPageInfo(mydata.page);
+
   /**  object.good="haha";
     object.images = app.globalData.paurl + '/WXIndex/getImages?imgurl=' //+"E:/pic/wx1da383f6062172ae.2019-12-10-16-14-01-346.jpg";
     timer = setTimeout(function () {
@@ -45,6 +68,181 @@ Page({
     **/
    
   },
+  // 更新页面信息
+  // 此处的回调函数在 传入新值之前执行 主要用来清除页面信息
+  getPageInfo(page, callback) {
+    var that = this;
+    wx.showLoading({
+      title: '加载中...',
+    })
+    console.log("getPageInfo");
+    console.log("page" + page);
+    var limited = 6;
+    var offset = (page - 1) * 6;
+    wx.request({
+      url: app.globalData.paurl + '/WXIndex/getComment',
+      method: "POST",
+      data: {
+        sourceId: mydata.sourceId,
+        pageSize: limited,
+        pageNum: page
+      },
+      header: {
+        "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+      },
+      success: res => {
+        console.log(res);
+        if (page == 1) {
+          that.data.list = res.data;
+          that.setData({
+            list: that.data.list
+          })
+          mydata.end = 0;
+        } else {
+          // 当前页为其他页
+          var list = that.data.list;
+          if (res.data.length != 0) {
+            list = that.addArr(list, res.data);
+            that.setData({
+              list: list
+            })
+            mydata.end = 0;
+          } else {
+            mydata.end = 1;
+          }
+        }
+        wx.hideLoading();
+      }
+    })
+  },
+  submitForm(e) {
+    var form = e.detail.value;
+    var that = this;
+    if (form.comment == "") {
+      util.showLog('请输入评论');
+      return;
+    }
+    // 提交评论
+    wx.request({
+      url: app.globalData.paurl + '/WXIndex/insertComment',
+      method: "POST",
+      data: {
+        sourceId: mydata.sourceId,
+        comment: form.comment,
+        userId: app.globalData.userId,
+        replyCommentId: mydata.commentId,
+        replyopenid: mydata.replyopenid,
+      },
+      header: {
+        "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+        //token: app.globalData.token
+      },
+      success: res => {
+        console.log(res)
+        if (res.data.success) {
+          wx.showToast({
+            title: "回复成功"
+          })
+          that.refresh();
+          mydata.commentId = "";
+          mydata.replyopenid="";
+          mydata.replyUserName = "";
+          this.setData({
+            replyUserName: mydata.replyUserName,
+            reply: false
+          })
+        } else {
+          wx.showToast({
+            title: '回复失败，请检查您的网络',
+          })
+        }
+      }
+    })
+  },
+  /**
+* 页面下拉刷新事件的处理函数
+*/
+  refresh: function () {
+    console.log('refresh');
+    mydata.page = 1
+    this.getPageInfo(mydata.page, function () {
+      this.setData({
+        list: []
+      })
+    });
+    mydata.end = 0;
+  },
+  /**
+  * 页面上拉触底事件的处理函数
+  */
+  bindDownLoad: function () {
+    console.log("onReachBottom");
+    var that = this;
+    if (mydata.end == 0) {
+      mydata.page++;
+      that.getPageInfo(mydata.page);
+    }
+  },
+  bindReply: function (e) {
+    console.log(e);
+    mydata.commentId = e.target.dataset.commentid;
+    mydata.replyUserName = e.target.dataset.commentusername;
+    mydata.replyopenid = e.target.dataset.openid;
+    this.setData({
+      replyUserName: mydata.replyUserName,
+      reply: true
+    })
+  },
+  // 合并数组
+  addArr(arr1, arr2) {
+    for (var i = 0; i < arr2.length; i++) {
+      arr1.push(arr2[i]);
+    }
+    return arr1;
+  },
+  deleteComment: function (e) {
+    console.log(e);
+    var that = this;
+    var commentId = e.target.dataset.commentid;
+
+    wx.showModal({
+      title: '删除评论',
+      content: '请确认是否删除该评论？',
+      success: function (res) {
+        if (res.confirm) {
+          wx.request({
+            url: app.globalData.paurl + '/WXIndex/deleteComment',
+            method: "POST",
+            data: {
+              commentId: commentId
+            },
+            header: {
+              "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+            },
+            success: res => {
+              that.refresh();
+              wx.showToast({
+                title: "删除成功"
+              })
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  cancleReply: function (e) {
+    mydata.commentId = "";
+    mydata.replyUserName = "";
+    mydata.replyopenid="";
+    this.setData({
+      replyUserName: mydata.replyUserName,
+      reply: false
+    })
+  },
+
+
   previewImage: function (e) {
     var current = e.target.dataset.src;
     wx.previewImage({

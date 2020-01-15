@@ -1,13 +1,15 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/phoneindex/index",
     "pages/mapindex/mapindex",
     "pages/pointdetail/pointdetail",
     "pages/addNew/addNew",
     "pages/userCenter/userCenter",
     "pages/receninfo/receninfo",
     "pages/videplay/videoplay",
-    "pages/videplay/playpage"
+    "pages/videplay/playpage",
+    "templates/comment/comment"
   ],
   "window": {
     "backgroundTextStyle": "light",

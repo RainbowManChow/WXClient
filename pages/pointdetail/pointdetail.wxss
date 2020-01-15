@@ -1,4 +1,5 @@
 @import "../../comm/style/animation.wxss";
+@import "../../templates/comment/comment.wxss";
 .container{
 padding: 0rpx;
 }
@@ -161,6 +162,6 @@ padding: 0rpx;
   color: white;
   padding: 0rpx 30rpx;
   width: 30vw;
-  height: 8vm;
+  height: 8vw;
   text-align: center;
 }
