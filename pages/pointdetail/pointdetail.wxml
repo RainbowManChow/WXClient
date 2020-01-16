@@ -25,10 +25,12 @@
                 </block>
             </scroll-view>
             </view>
+             <view class="fd-bd-title">操作</view>
+              <button   class='guoqu' bindtap="goto" lang="zh_CN" >往这去</button>
+  <button   class='guoqu' bindtap="commentReply" lang="zh_CN" >回复</button>
             <view class="fd-bd-title">留言</view>
             <template is="comment" data="{{list:list,scrollHeight:scrollHeight,scrollTop:scrollTop,reply:reply,replyUserName:replyUserName,userId:userId,formshow:formshow,nocomment:nocomment}}"></template>
  </view>
-  <button   class='guoqu' bindtap="goto" lang="zh_CN" >往这去</button>
-  <button   class='guoqu' bindtap="commentReply" lang="zh_CN" >回复</button>
-   <view class="fd-bd-intro" style="align-items: center;justify-content: center; display: flex;margin-top:10vw">已经到底啦~</view>
+
+ <!--  <view class="fd-bd-intro" style="align-items: center;justify-content: center; display: flex;margin-top:10vw">已经到底啦~</view>  -->
 </view>

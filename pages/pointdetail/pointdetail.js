@@ -49,7 +49,7 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          scrollHeight:'90vh',
+          scrollHeight:'85vh',
           userId: app.globalData.userId
         });
       }
@@ -95,12 +95,15 @@ Page({
         if (page == 1) {
           that.data.list = res.data;
           var nocomment=false;
+          var scrollhe ="85vh";
           if (res.data.length<1){
             nocomment=true;
+            scrollhe = "15vh";
           }
           that.setData({
             list: that.data.list,
-            nocomment: nocomment
+            nocomment: nocomment,
+            scrollHeight: scrollhe
           })
           mydata.end = 0;
         } else {
@@ -223,7 +226,7 @@ Page({
       success: function (res) {
         if (res.confirm) {
           wx.request({
-            url: app.globalData.paurl + '/WXIndex/deleteComment',
+            url: app.globalData.paurl + '/WXIndex/deleteComment2',
             method: "POST",
             data: {
               commentId: commentId
