@@ -1,6 +1,6 @@
 <!--templates/comment/comment.wxml-->
 <template name="comment">
-<scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}px;" class="list" bindscrolltolower="bindDownLoad" bindscrolltoupper="refresh">
+<scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}};" class="list" bindscrolltolower="bindDownLoad" bindscrolltoupper="refresh">
  <view class="pro-con">
  <block wx:for="{{list}}" wx:key="{{index}}">
   <view class="pro-box">
@@ -34,18 +34,20 @@
   </view>
   </view>
  </block>
+<view class="fd-bd-intro" wx:if="{{nocomment}}">暂无哦(⊙o⊙)？</view>
  </view>
 </scroll-view>
-<form bindsubmit="submitForm" report-submit="true">
+<form bindsubmit="submitForm" report-submit="true" wx:if="{{formshow}}">
  <view class="release">
  <view wx:if="{{reply}}" class="replyinfo1">
-  回复<text class="text">hehe</text>
-  <button class="cancel" bindtap="cancleReply">取消回复</button>
+  回复<text class="text">{{replyUserName}}</text>
  </view>
  <view class="replyinfo2">
   <textarea placeholder-class="input_null" fixed="true" maxlength="-1" show-confirm-bar="false" cursor-spacing="15" auto-height="true" placeholder="请输入回复" name="comment"></textarea>
   <button form-type="submit" class="submit">发送</button>
+ <button class="cancelcomment" bindtap="cancleReply">取消</button>
  </view>
  </view>
 </form>
+ 
 </template>

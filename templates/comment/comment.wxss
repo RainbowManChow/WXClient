@@ -1,8 +1,8 @@
 /* large button style */
 .large-btn{
- background: #f68135;
+ background: #673bb7;
  border-radius: 50rpx;
- border: 1px solid #f68135;
+ border: 1px solid #673bb7;
  color: #fff;
  height: 100rpx;
  line-height: 100rpx;
@@ -12,7 +12,7 @@
 }
 .large-btn.empty{
  background: transparent;
- color: #f68135;
+ color: #673bb7;
  margin-top: 50rpx;
 }
 .large-btn.disabled{
@@ -83,10 +83,10 @@
  height: 48rpx;
 }
  .pro-box .sharebtn{
- height:48rpx;
- background: #f68135;
+ /*height:48rpx;*/
+ background: #673bb7;
  border-radius: 50rpx;
- border: 1px solid #f68135;
+ border: 1px solid #673bb7;
  color: #fff;
  text-align: center;
  line-height: 50rpx;
@@ -119,9 +119,9 @@
  padding: 0rpx,2rpx,0rpx,2rpx;
 } 
 .pro-box .addr-info .addr-text .color2{
- color: #f68135;
+ color: #673bb7;
  border-color: #ccc;
- border: 1px solid #f68135;
+ border: 1px solid #673bb7;
  border-radius:10px;
  margin-right: 5px;
  margin-left: 5px;
@@ -160,7 +160,7 @@
  white-space: nowrap;
 }
 .pro-box .addr .addr-text .color-text{
- color: #f68135;
+ color: #673bb7;
 }
 .pro-box .addr .time{
  font-size: 26rpx;
@@ -183,12 +183,16 @@
  font-size: 26rpx;
 }
 .pro-box .info .text .delete{
- color: #f68135;
+ height:48rpx;
+ background: #fff;
  border-radius: 50rpx;
- border: 1px solid #f68135;
- width: 100rpx;
- height: 48rpx;
+ border: 1px solid #673bb7;
+ color: #673bb7;
  text-align: center;
+ line-height: 50rpx;
+ font-size:30rpx;
+padding-left: 3vw;
+padding-right: 3vw;
 }
 
 
@@ -262,17 +266,22 @@
  height: 64rpx;
  line-height: 64rpx;
  text-align: center;
- color: #6c0;
- margin: 0 3px;
+ background: #673bb7;
+ color: #fff;
+ margin-top: 2vw;
+ margin-left:3px;
+ padding: 0;
+}
+
+.release .cancelcomment {
+ width: 120rpx;
+ height: 64rpx;
+ line-height: 64rpx;
+ text-align: center;
+ background: #fff;
+ color: #673bb7;
+ margin-top: 2vw;
+ margin-left:3px;
  padding: 0;
 }
   
-.pro-box .info .text .delete {
- color: #f68135;
- border-radius: 50rpx;
- border: 1px solid #f68135;
- font-size: 28 rpx;
- width: 150rpx;
- height: 48rpx;
- text-align: center;
-}

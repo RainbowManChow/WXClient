@@ -162,6 +162,7 @@ padding: 0rpx;
   color: white;
   padding: 0rpx 30rpx;
   width: 30vw;
-  height: 8vw;
+  height: 8vm;
+  margin-top: 5vw;
   text-align: center;
 }

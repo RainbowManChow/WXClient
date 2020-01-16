@@ -4,7 +4,8 @@ var timer;
 
 var mydata = {
   end: 0,
-  replyUserName: ""
+  replyUserName: "",
+  limit: 6
 }
 
 Page({
@@ -48,7 +49,7 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          scrollHeight:'5vw',
+          scrollHeight:'90vh',
           userId: app.globalData.userId
         });
       }
@@ -77,8 +78,7 @@ Page({
     })
     console.log("getPageInfo");
     console.log("page" + page);
-    var limited = 6;
-    var offset = (page - 1) * 6;
+    var limited = mydata.limit;
     wx.request({
       url: app.globalData.paurl + '/WXIndex/getComment',
       method: "POST",
@@ -94,8 +94,13 @@ Page({
         console.log(res);
         if (page == 1) {
           that.data.list = res.data;
+          var nocomment=false;
+          if (res.data.length<1){
+            nocomment=true;
+          }
           that.setData({
-            list: that.data.list
+            list: that.data.list,
+            nocomment: nocomment
           })
           mydata.end = 0;
         } else {
@@ -149,7 +154,8 @@ Page({
           mydata.replyUserName = "";
           this.setData({
             replyUserName: mydata.replyUserName,
-            reply: false
+            reply: false,
+            formshow: false
           })
         } else {
           wx.showToast({
@@ -190,7 +196,13 @@ Page({
     mydata.replyopenid = e.target.dataset.openid;
     this.setData({
       replyUserName: mydata.replyUserName,
-      reply: true
+      reply: true,
+      formshow:true
+    })
+  },
+  commentReply: function (e) {
+    this.setData({
+      formshow: true
     })
   },
   // 合并数组
@@ -238,7 +250,8 @@ Page({
     mydata.replyopenid="";
     this.setData({
       replyUserName: mydata.replyUserName,
-      reply: false
+      reply: false,
+      formshow: false
     })
   },
 
@@ -322,12 +335,12 @@ Page({
         images = item.needimages;
         imagess = images.split(",");
         for (var j = 0, len = imagess.length; j < len; j++) {
-          resultimagess.push(that.data.paurl + '/WXIndex/getImages?imgurl=' + imagess[j]);
+          resultimagess.push(app.globalData.paurl + '/WXIndex/getImages?imgurl=' + imagess[j]);
         }
         that.imagesshow = resultimagess;
         object.imagess = resultimagess;
         object.location = item.needlocation;
-        object.images = that.data.paurl + '/WXIndex/getImages?imgurl=' + imagess[0];
+        object.images = app.globalData.paurl + '/WXIndex/getImages?imgurl=' + imagess[0];
         object.user = item.needusername;
         object.good = item.needdescription;
         object.title = item.needtitle;
