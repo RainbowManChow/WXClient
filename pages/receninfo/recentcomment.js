@@ -2,13 +2,15 @@ var app = getApp()
 Page({
   data: {
     items: [],
+    markers:[],
     startX: 0, //开始坐标
     startY: 0
   },
   onLoad: function (option) {
     var that = this;
+    that.data.markers = JSON.parse(option.items);
     that.setData({
-      items: JSON.parse(option.items),
+      items: JSON.parse(option.comments),
       userInfo: app.globalData.userInfo
     });
   },
@@ -64,17 +66,17 @@ Page({
   },
   //删除事件
   del: function (e) {
-    var that=this
+    var that = this
     wx.showModal({
-      title: '删除信息',
-      content: '请确认是否删除这条发布的信息？',
+      title: '删除评论',
+      content: '请确认是否删除该评论？',
       success: function (res) {
         if (res.confirm) {
           wx.request({
-            url: app.globalData.paurl + '/WXIndex/deleteHelp',
+            url: app.globalData.paurl + '/WXIndex/deleteComment2',
             method: "POST",
             data: {
-              id: e.currentTarget.dataset.id
+              commentId: e.currentTarget.dataset.id
             },
             header: {
               "content-type": "application/x-www-form-urlencoded;charset=utf-8",
@@ -104,7 +106,7 @@ Page({
     var that = this;
     console.log(e.currentTarget.dataset.id);
     wx.navigateTo({
-      url: '/pages/pointdetail/pointdetail?markerarray=' + JSON.stringify(that.data.items) + '&markerId=' + e.currentTarget.dataset.id
+      url: '/pages/pointdetail/pointdetail?markerarray=' + JSON.stringify(that.data.markers) + '&markerId=' + e.currentTarget.dataset.id
     })
   }
 })

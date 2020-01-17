@@ -52,6 +52,10 @@ Page({
     })
 
   },
+  onPullDownRefresh: function () {
+    this.onLoad();
+    wx.stopPullDownRefresh
+  },
   input: function (e) {
     this.setData({
       content: e.detail.value

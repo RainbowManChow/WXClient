@@ -2,5 +2,5 @@
   "usingComponents": {
     "comment":"/components/comment/comment"
   },
-  "enablePullDownRefresh": false
+  "enablePullDownRefresh": true
 }

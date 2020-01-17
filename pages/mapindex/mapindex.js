@@ -59,6 +59,10 @@ Page({
     })
 
   },
+  onPullDownRefresh: function () {
+    this.onReady();
+    wx.stopPullDownRefresh();
+  },
 
   //转发
   onShareAppMessage: function (res) {

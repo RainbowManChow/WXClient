@@ -9,10 +9,12 @@
     "pages/receninfo/receninfo",
     "pages/videplay/videoplay",
     "pages/videplay/playpage",
-    "templates/comment/comment"
+    "templates/comment/comment",
+    "pages/receninfo/recentcomment"
   ],
   "window": {
-    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#673bb7",
     "navigationBarTitleText": "RainbowMan",
     "navigationBarTextStyle": "black"

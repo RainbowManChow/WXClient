@@ -5,12 +5,13 @@ Page({
     userInfo: {},
     phone:null,
     items:[],
+    comments:[],
     rencentcount:""
   },
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: app.globalData.paurl + '/WXIndex/getRecentHelpByOpenid',
+      url: app.globalData.paurl + '/WXIndex/getRecentInfoByOpenid',
       method: 'post',
       header: {
         'content-type': 'application/x-www-form-urlencoded',
@@ -20,9 +21,11 @@ Page({
       },
       success: function (res) {
         that.setData({
-          items: res.data,
+          items: res.data.items,
+          comments: res.data.comments,
           userInfo: app.globalData.userInfo,
-          rencentcount: res.data.length
+          rencentcount: res.data.items.length,
+          commentcount: res.data.comments.length
         });
 
       },
@@ -38,6 +41,10 @@ Page({
 
 
   },
+  onPullDownRefresh: function(){
+    this.onLoad();
+    wx.stopPullDownRefresh();
+  },
   unfinished () {
     wx.showToast({
       title: '敬请期待',
@@ -49,6 +56,12 @@ Page({
    wx.navigateTo({
      url: '/pages/receninfo/receninfo?items=' + JSON.stringify(that.data.items)
    })
+  },
+  gorecentcomment() {
+    var that = this;
+    wx.navigateTo({
+      url: '/pages/receninfo/recentcomment?items=' + JSON.stringify(that.data.items) + "&comments=" + JSON.stringify(that.data.comments)
+    })
   },
   logout(){
     app.globalData.loginStatus = 0;

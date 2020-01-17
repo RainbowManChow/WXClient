@@ -96,9 +96,10 @@ Page({
           that.data.list = res.data;
           var nocomment=false;
           var scrollhe ="85vh";
-          if (res.data.length<1){
+          if (typeof res.data == 'string' || res.data.length<1){
             nocomment=true;
             scrollhe = "15vh";
+            that.data.list=[];
           }
           that.setData({
             list: that.data.list,
@@ -122,6 +123,10 @@ Page({
         wx.hideLoading();
       }
     })
+  },
+  onPullDownRefresh: function () {
+    this.onLoad();
+    wx.stopPullDownRefresh();
   },
   submitForm(e) {
     var form = e.detail.value;
@@ -325,6 +330,7 @@ Page({
 
   },
   fordo: function (markers, markerId){
+    var flag=false;
     var object = this.data.filmDetail;
     var that=this;
     var images = "", description = "", user = "", location = "";
@@ -332,6 +338,7 @@ Page({
     var resultimagess = new Array();
     for(let item of markers) {
       if (item.id == markerId) {
+        flag=true;
         this.data.lat = item.latitude;
         this.data.lon = item.longitude;
         this.data.name = item.needtitle;
@@ -353,6 +360,16 @@ Page({
           showLoading: false
         });
       }
+    }
+    if (!flag){
+      var object = this.data.filmDetail;
+      object.user = "用户已删除该条记录";
+      object.good = "用户已删除该条记录";
+      object.title = "用户已删除该条记录";
+      that.setData({
+        filmDetail: object,
+        showLoading: false
+      });
     }
   },
 
