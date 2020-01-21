@@ -125,7 +125,7 @@ Page({
     })
   },
   onPullDownRefresh: function () {
-    this.onLoad();
+   this.refresh();
     wx.stopPullDownRefresh();
   },
   submitForm(e) {
@@ -313,13 +313,6 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
 
   },
 

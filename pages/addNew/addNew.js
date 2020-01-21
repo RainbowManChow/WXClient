@@ -109,6 +109,22 @@ Page({
   },
   //发布按钮事件
   send: function () {
+    if (this.data.img_url.length<1){
+      wx.showToast({
+        title: '至少一张图片',
+        icon: 'none',
+        duration: 2000
+      });
+      return;
+    }
+    if (this.data.title==''){
+      wx.showToast({
+        title: '请填写标题',
+        icon: 'none',
+        duration: 2000
+      });
+      return;
+    }
     var that = this;
     var user_id = app.globalData.userId;
     wx.showLoading({

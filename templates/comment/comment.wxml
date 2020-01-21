@@ -1,6 +1,6 @@
 <!--templates/comment/comment.wxml-->
 <template name="comment">
-<scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}};" class="list" bindscrolltolower="bindDownLoad" bindscrolltoupper="refresh">
+<scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}};" class="list" bindscrolltolower="bindDownLoad" bindscrolltoupper="refreshno">
  <view class="pro-con">
  <block wx:for="{{list}}" wx:key="{{index}}">
   <view class="pro-box">
