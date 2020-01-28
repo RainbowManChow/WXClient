@@ -79,7 +79,10 @@ Page({
       },
       success: function (res) {
         if (res.data.respcode == '0') {
-          app.globalData.userId = res.data.uid
+          app.globalData.userId = res.data.uid;
+          if (app.globalData.socketStatus === 'closed') {
+            app.openSocket();
+          }
           wx.hideLoading();//'/pages/mapindex/mapindex'
           wx.reLaunch({     //跳转至指定页面并关闭其他打开的所有页面（这个最好用在返回至首页的的时候
             url: '/pages/mapindex/mapindex'
