@@ -10,7 +10,9 @@
     "pages/videplay/videoplay",
     "pages/videplay/playpage",
     "templates/comment/comment",
-    "pages/receninfo/recentcomment"
+    "pages/receninfo/recentcomment",
+    "pages/receninfo/recentmsg",
+    "pages/receninfo/msgdetail"
   ],
   "window": {
     "enablePullDownRefresh": true,

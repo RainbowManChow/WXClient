@@ -7,7 +7,8 @@ Page({
     markers: "",
     markid: "",
     filmDetail: {},
-    markerob:{}
+    markerob:{},
+    msgnew:false
   },
 getauth:function(num){
   console.log("copy?");
@@ -101,6 +102,21 @@ getauth:function(num){
                       strokeWidth: 1
                     }] **/
               });
+              wx.request({
+                url: app.globalData.paurl + '/WXIndex/getInitMsg',
+                method: 'post',
+                header: {
+                  'content-type': 'application/x-www-form-urlencoded',
+                },
+                data: {
+                  'userId': app.globalData.userId
+                },
+                success: function (ress) {
+                },
+                fail: function (ress) {
+                  console.log(ress);
+                }
+              })
 
             },
             fail: function () {
@@ -126,7 +142,12 @@ getauth:function(num){
     return;
   })
 },
+onLoad:function(){
+  
+ 
+},
   onReady: function (option) {
+    app.globalData.mapindexJS = this
     this.getauth();
   },
   onPullDownRefresh: function () {
@@ -203,6 +224,12 @@ getauth:function(num){
     var that = this;
     wx.navigateTo({
       url: '/pages/userCenter/userCenter?markers=' + that.data.markers
+    })
+  },
+  toMsg: function (e) {
+    var that = this;
+    wx.navigateTo({
+      url: '/pages/receninfo/recentmsg'
     })
   },
   onShow: function () {

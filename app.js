@@ -8,6 +8,7 @@ App({
   },
 
   openSocket() {
+    var that=this;
     //打开时的动作
     wx.onSocketOpen(() => {
       console.log('WebSocket 已连接')
@@ -25,15 +26,29 @@ App({
     // 监听服务器推送的消息
     wx.onSocketMessage(message => {
       //把JSONStr转为JSON
-
-      message = message.data.replace(" ", "");
+      var jj ;
+      message = message.data;
       if (typeof message != 'object') {
         message = message.replace(/\ufeff/g, ""); //重点
-        var jj = JSON.parse(message);
-        message = jj;
+       jj = JSON.parse(message);
+      }else{
+        jj = message;
       }
+      var status=false;
+      for (let i = 0; i < jj.length; i++) {
+        if (jj[i].status=='0'){
+          status=true;
+        }
+      }
+      that.globalData.messageList = jj;
+      that.globalData.mapindexJS.setData({
+        msgnew: status
+      });
+      that.globalData.recentmsgJS.setData({
+        items: jj
+      });
       console.log("【websocket监听到消息】内容如下：");
-      console.log(message);
+      console.log(jj);
     })
     // 打开信道
     wx.connectSocket({
@@ -92,7 +107,10 @@ App({
     access: null,
     socketStatus: 'closed',
     paurl: 'https://rainbowman.goho.co',  //http://localhost:9999 //https://rainbowman.goho.co
-    wsurl: 'wss://rainbowman.goho.co'
+    wsurl: 'wss://rainbowman.goho.co',
+    messageList:[],
+    recentmsgJS:null,
+    mapindexJS:null
   },
   title: [],
   imgUrls: [],

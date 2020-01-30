@@ -18,6 +18,7 @@ Page({
     lat:"",
     lon:"",
     name:"",
+    helpopenid:"",
     markerarray:[],
     markerId:"",
     filmDetail: {},
@@ -145,6 +146,7 @@ Page({
         userId: app.globalData.userId,
         replyCommentId: mydata.commentId,
         replyopenid: mydata.replyopenid,
+        helpopenid: that.data.helpopenid
       },
       header: {
         "content-type": "application/x-www-form-urlencoded;charset=utf-8",
@@ -335,6 +337,7 @@ Page({
         this.data.lat = item.latitude;
         this.data.lon = item.longitude;
         this.data.name = item.needtitle;
+        this.data.helpopenid = item.helpopenid;
         images = item.needimages;
         imagess = images.split(",");
         for (var j = 0, len = imagess.length; j < len; j++) {
