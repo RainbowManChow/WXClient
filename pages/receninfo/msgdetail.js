@@ -1,4 +1,5 @@
 // pages/receninfo/msgdetail.js
+var app = getApp()
 Page({
 
   /**
@@ -18,7 +19,22 @@ Page({
      info: options.info
    })
     if (status=='0'){
-
+      wx.request({
+        url: app.globalData.paurl + '/WXIndex/updateMsgStatus',
+        method: 'post',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded',
+        },
+        data: {
+          'id': id
+        },
+        success: function (ress) {
+          app.getInitMsg();
+        },
+        fail: function (ress) {
+          console.log(ress);
+        }
+      })
    }
   },
 

@@ -72,10 +72,11 @@ Page({
       success: function (res) {
         if (res.confirm) {
           wx.request({
-            url: app.globalData.paurl + '/WXIndex/deleteHelp',
+            url: app.globalData.paurl + '/WXIndex/updateMsgStatus',
             method: "POST",
             data: {
-              id: e.currentTarget.dataset.id
+              id: e.currentTarget.dataset.id,
+              delflag:1
             },
             header: {
               "content-type": "application/x-www-form-urlencoded;charset=utf-8",
@@ -87,7 +88,8 @@ Page({
               that.data.items.splice(e.currentTarget.dataset.index, 1)
               that.setData({
                 items: that.data.items
-              })
+              });
+              app.getInitMsg();
             }
           })
         } else if (res.cancel) {
@@ -97,8 +99,16 @@ Page({
     })
 
   },
+  onShow:function(){
+    if (app.globalData.socketStatus === 'closed') {
+      app.openSocket();
+    }
+  },
   onPullDownRefresh: function () {
     this.onLoad();
+    if (app.globalData.socketStatus === 'closed') {
+      app.openSocket();
+    }
     wx.stopPullDownRefresh();
   },
   godetail: function (e) {

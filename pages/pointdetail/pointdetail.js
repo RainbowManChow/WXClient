@@ -136,6 +136,9 @@ Page({
       util.showLog('请输入评论');
       return;
     }
+    wx.showLoading({
+      title: '提交中',
+    })
     // 提交评论
     wx.request({
       url: app.globalData.paurl + '/WXIndex/insertComment',
@@ -155,6 +158,7 @@ Page({
       success: res => {
         console.log(res)
         if (res.data.success) {
+          wx.hideLoading();
           wx.showToast({
             title: "回复成功"
           })
@@ -168,6 +172,7 @@ Page({
             formshow: false
           })
         } else {
+          wx.hideLoading();
           wx.showToast({
             title: '回复失败，请检查您的网络',
           })

@@ -102,22 +102,9 @@ getauth:function(num){
                       strokeWidth: 1
                     }] **/
               });
-              wx.request({
-                url: app.globalData.paurl + '/WXIndex/getInitMsg',
-                method: 'post',
-                header: {
-                  'content-type': 'application/x-www-form-urlencoded',
-                },
-                data: {
-                  'userId': app.globalData.userId
-                },
-                success: function (ress) {
-                },
-                fail: function (ress) {
-                  console.log(ress);
+              if (app.globalData.socketStatus === 'closed') {
+                app.openSocket();
                 }
-              })
-
             },
             fail: function () {
               wx.hideLoading();
@@ -235,6 +222,9 @@ onLoad:function(){
   onShow: function () {
    // this.getauth();
    // this.onReady();
+    if (app.globalData.socketStatus === 'closed') {
+      app.openSocket();
+    }
   },
   gotohere: function (res) {
     let markerId = res.markerId;// 获取点击的markers  id

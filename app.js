@@ -13,6 +13,7 @@ App({
     wx.onSocketOpen(() => {
       console.log('WebSocket 已连接')
       this.globalData.socketStatus = 'connected';
+      this.getInitMsg();
     })
     //断开时的动作
     wx.onSocketClose(() => {
@@ -21,7 +22,8 @@ App({
     })
     //报错时的动作
     wx.onSocketError(error => {
-      console.error('socket error:', error)
+      console.error('socket error:', error);
+      this.globalData.socketStatus = 'closed'
     })
     // 监听服务器推送的消息
     wx.onSocketMessage(message => {
@@ -99,6 +101,24 @@ App({
       })
     }
   },
+  getInitMsg:function(){
+    wx.request({
+      url: this.globalData.paurl + '/WXIndex/getInitMsg',
+      method: 'post',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+      data: {
+        'userId': this.globalData.userId
+      },
+      success: function (ress) {
+      },
+      fail: function (ress) {
+        console.log(ress);
+      }
+    })
+  },
+  
   globalData: {
     userInfo: null,
     code: null,

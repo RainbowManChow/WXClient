@@ -23,7 +23,7 @@
       </view>
       <image class='right' src='/images/arrow-right.png'></image>
     </view>
-
+<!--
     <view class='list-item' bindtap='unfinished'>
       <image class='left' src='/images/coupon.png'></image>
       <view class='text-list'>
@@ -32,7 +32,7 @@
       </view>
       <image class='right' src='/images/arrow-right.png'></image>
     </view>
-
+-->
      <view class='list-item' bindtap='gotofuli'>
       <image class='left' src='/images/coupon.png'></image>
       <view class='text-list'>
