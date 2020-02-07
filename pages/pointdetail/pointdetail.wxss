@@ -4,6 +4,15 @@
 padding: 0rpx;
 }
 
+.top-icon{
+  position:static;
+  width: 8vw;
+  height: 8vw;
+  margin-right: 24rpx;
+  margin-top: 20rpx;
+  border-radius: 60%;
+}
+
 
 .fd-hd {
     position: relative;

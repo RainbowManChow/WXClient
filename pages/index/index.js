@@ -87,7 +87,7 @@ Page({
         } else if (res.data.respcode == '15') {
           wx.hideLoading()
           wx.showToast({
-            title: '请重新授权',
+            title: '请下拉刷新重新授权',
             icon: 'none',
             duration: 2000
           })
@@ -95,8 +95,8 @@ Page({
           console.log(res.data.respcode);
           wx.hideLoading();
           wx.showToast({
-            title: '请重新授权',
-            icon: 'warn',
+            title: '请下拉刷新重新授权',
+            icon: 'none',
             duration: 1500,
           });
         }
@@ -124,6 +124,10 @@ Page({
     wx.reLaunch({     //跳转至指定页面并关闭其他打开的所有页面（这个最好用在返回至首页的的时候
       url: '/pages/mapindex/mapindex'
     })
+  },
+  onPullDownRefresh: function () {
+    this.onLoad();
+    wx.stopPullDownRefresh();
   },
   /* 显示弹窗 */
   showPopup() {

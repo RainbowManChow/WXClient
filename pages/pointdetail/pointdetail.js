@@ -374,6 +374,7 @@ Page({
         object.good = item.needdescription;
         object.title = item.needtitle;
         object.time = item.needrecentdate;
+        object.avatarUrl= item.needavatarUrl
         that.setData({
           filmDetail: object,
           showLoading: false
@@ -395,6 +396,16 @@ Page({
   /**
    * 用户点击右上角分享
    */
+  onShareAppMessage: function (res) {
+    var userid = app.globalData.userid;
+    if (res.from === 'button') { }
+    return {
+      title: '转发',
+      path: '/pages/index/index?from_uid=' + userid,
+      success: function (res) { }
+    }
+  },
+/**
   onShareAppMessage: function () {
     var that=this
     return {
@@ -403,6 +414,7 @@ Page({
       success: function (res) { }
     }
   },
+  **/
   onPageScroll: function (e) {
   /**  if (e.scrollTop < 0) {
       wx.pageScrollTo({

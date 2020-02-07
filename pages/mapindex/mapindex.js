@@ -148,7 +148,7 @@ onLoad:function(){
     if (res.from === 'button') { }
     return {
       title: '转发',
-      path: '/pages/mapindex/mapindex?from_uid=' + userid,
+      path: '/pages/index/index?from_uid=' + userid,
       success: function (res) { }
     }
   },
@@ -312,6 +312,8 @@ onLoad:function(){
         object.images = app.globalData.paurl + '/WXIndex/getImages?imgurl=' + imagess[0];
         object.time = item.needrecentdate;
         object.name = item.needtitle;
+        object.user = item.needusername;
+        object.avatarUrl = item.needavatarUrl
         var imagetwo=false;
         if (resultimagess.length>1){
           object.imagestwo = app.globalData.paurl + '/WXIndex/getImages?imgurl=' + imagess[1];

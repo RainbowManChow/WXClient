@@ -217,8 +217,18 @@ cover-image,cover-view{
     width: 40vw;
     color: white;
     display: block;
-    left:60vw;
+    left:75vw;
     top:2vh;
+}
+
+.bottombuttoncen{
+ width: 8vw;
+  height:  8vw;
+  border-radius: 60%;
+    color: white;
+    display: block;
+    left:65vw;
+    top:1vh;
 }
  
 

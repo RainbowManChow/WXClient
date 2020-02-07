@@ -6,7 +6,7 @@
             <image src="{{filmDetail.images}}" class="fd-cover" bindtap="previewImage"></image>
             <view class="fd-intro">
                 <view class="fd-title">{{filmDetail.title}}</view>
-                <view class="fd-intro-txt">上传人：{{filmDetail.user}}</view>
+                <view class="fd-intro-txt">上传人：<image class="top-icon" src="{{filmDetail.avatarUrl}}"></image>{{filmDetail.user}}</view>
                 <view class="fd-intro-txt">上传地点：{{filmDetail.location}}</view>
                 <view class="fd-intro-txt">上传时间：{{filmDetail.time}}</view>
             </view>

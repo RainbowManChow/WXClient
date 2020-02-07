@@ -41,7 +41,8 @@
  
       <cover-view class='viewIcon' bindtap="godetail">
            <cover-view class="bottombutton" >{{object.time}}</cover-view>
-              <cover-view class="bottombuttoright">{{object.name}}</cover-view>
+           <cover-image class="bottombuttoncen" wx:if='{{object.avatarUrl}}' src='{{object.avatarUrl}}'/>   
+              <cover-view class="bottombuttoright">{{object.user}}</cover-view>
       </cover-view>
  
     </cover-view>
