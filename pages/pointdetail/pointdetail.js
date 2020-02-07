@@ -37,9 +37,27 @@ Page({
     if (options.markerarray) {
       this.data.markerarray = JSON.parse(options.markerarray);
       this.fordo(this.data.markerarray, this.data.markerId);
-    } else {
+    } else if (options.markers) {
       this.data.markers = JSON.parse(options.markers);
       this.fordo(this.data.markers, this.data.markerId);
+    }else{
+      wx.request({
+        url: app.globalData.paurl + '/WXIndex/getHelpById',
+        method: 'post',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded',
+        },
+        data: {
+          'helpid': options.markerId
+        },
+        success: function (ress) {
+          that.data.markers = ress.data;
+          that.fordo(that.data.markers, that.data.markerId);
+        },
+        fail: function (ress) {
+          console.log(ress);
+        }
+      })
     }
 
     mydata.sourceId = options.markerId;

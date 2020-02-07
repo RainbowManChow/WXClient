@@ -106,7 +106,7 @@ Page({
     var that = this;
     console.log(e.currentTarget.dataset.id);
     wx.navigateTo({
-      url: '/pages/pointdetail/pointdetail?markerarray=' + JSON.stringify(that.data.markers) + '&markerId=' + e.currentTarget.dataset.id
+      url: '/pages/pointdetail/pointdetail?markerId=' + e.currentTarget.dataset.id
     })
   }
 })

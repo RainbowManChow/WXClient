@@ -15,8 +15,19 @@ Page({
   onLoad: function (options) {
     var status =options.status;
     var id = options.id;
+    var helpid = options.helpid;
+    var title = options.title;
+    var userName = options.username;
+    var userPhoto = options.userphoto;
+    var needrecentdate = options.needrecentdate;
    this.setData({
-     info: options.info
+     id:id,
+     info: options.info,
+     title: title,
+     userName: userName,
+     userPhoto: userPhoto,
+     needrecentdate: needrecentdate,
+     helpid: helpid
    })
     if (status=='0'){
       wx.request({
@@ -36,6 +47,11 @@ Page({
         }
       })
    }
+  },
+  bindgo:function(e){
+    wx.navigateTo({
+      url: '/pages/pointdetail/pointdetail?markerId=' + e.currentTarget.dataset.helpid
+    })
   },
 
   /**

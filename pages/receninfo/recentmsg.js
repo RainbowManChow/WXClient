@@ -115,7 +115,7 @@ Page({
     var that = this;
     console.log(e.currentTarget.dataset.id);
     wx.navigateTo({
-      url: '/pages/receninfo/msgdetail?info=' + e.currentTarget.dataset.info + "&id=" + e.currentTarget.dataset.id + "&status=" + e.currentTarget.dataset.status
+      url: '/pages/receninfo/msgdetail?info=' + e.currentTarget.dataset.info + "&id=" + e.currentTarget.dataset.id + "&status=" + e.currentTarget.dataset.status + "&title=" + e.currentTarget.dataset.title + "&username=" + e.currentTarget.dataset.username + "&userphoto=" + e.currentTarget.dataset.userphoto + "&needrecentdate=" + e.currentTarget.dataset.needrecentdate + "&helpid=" + e.currentTarget.dataset.helpid
     })
   }
 })

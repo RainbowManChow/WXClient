@@ -1,2 +1,28 @@
 <!--pages/receninfo/msgdetail.wxml-->
-<text>{{info}}</text>
+  <view class="pro-box">
+  <view class="head">
+   <image class="img" src="{{userPhoto}}" mode="aspectFit"></image>
+   <view class="box">
+   <view class="shead clear">
+    <view class="names fl">{{userName}}
+     <view>
+     -> {{title}}
+    </view>
+    </view>
+   </view>
+   </view>
+  </view>
+  <view class="addr-info">
+   <view class="addr-text">
+   {{info}}
+   </view>
+  </view>
+  <view class="info">
+   <view class="text">
+   <text decode="true">{{needrecentdate}}</text>
+   </view>
+   <view class="text">
+   <button class="sharebtn" data-helpid="{{helpid}}" bindtap="bindgo">到帖子</button>
+   </view>
+  </view>
+  </view>
